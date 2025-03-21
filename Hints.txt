@@ -1,1 +1,3 @@
 Allow the user to choose between automatic password or for them to enter their own set of characters and use them to generate a password.
+
+Checkout the project
