@@ -22,13 +22,13 @@ def _GenerateWithUserChars(length):
             if _punc in string.punctuation and len(_punc) == c_len:
                 combination = _nums + _punc + chars
                 password = ''.join(random.sample(combination, length))
-                print(f"\nPassword => {password}")
+                print(f"\nPassword => {password}\n")
             else:
-                print(f"\nTry again and enter punctuations only with a length of {c_len}.")
+                print(f"\nTry again and enter punctuations only with a length of {c_len}.\n")
         else:
-            print(f"\nTry again and enter digits only with a length of {c_len}.")
+            print(f"\nTry again and enter digits only with a length of {c_len}.\n")
     else:
-        print(f"\nTry again and enter alphabets only! with a length of {c_len + len_rem}.")
+        print(f"\nTry again and enter alphabets only! with a length of {c_len + len_rem}.\n")
 
 
 def generate_password(_length):
@@ -36,7 +36,7 @@ def generate_password(_length):
 
     # password = ''.join(random.choice(_chars) for _ in range(length))
     password = ''.join(random.sample(_chars, _length))  # Solution 2
-    print(f"\nPassword => {password}")
+    print(f"\nPassword => {password}\n")
 
 
 if __name__ == "__main__":
@@ -52,10 +52,10 @@ if __name__ == "__main__":
         elif option == "N":
             generate_password(length)
         else:
-            print("\nWrong input, try again!")
+            print("\nWrong input, try again!\n")
 
     else:
-        print("\nThe value must be numeric and >= 8.")
+        print("\nThe value must be numeric and >= 8.\n")
 
     sys.exit()
 
