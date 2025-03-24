@@ -37,7 +37,7 @@ def generateWithUserChars(length, loop):
     print()
 
 
-def generate_Password(_length, loop):
+def generateRanPassword(_length, loop):
     _chars = string.ascii_letters + string.digits + string.punctuation
     i = 1
     while i <= loop:
@@ -76,7 +76,7 @@ if __name__ == "__main__":
             if option == "Y":
                 generateWithUserChars(length, int(numP))
             elif option == "N":
-                generate_Password(length, int(numP))
+                generateRanPassword(length, int(numP))
             else:
                 print("\nWrong input, try again! (Y/N, y/n)\n")
         else:
