@@ -1,10 +1,6 @@
-import struct
-
 import cryptography
-import os
-
 from cryptography.exceptions import InvalidSignature
-from cryptography.fernet import Fernet, InvalidToken
+from cryptography.fernet import Fernet
 
 
 # This class should not output anything, but write to files.
@@ -13,22 +9,28 @@ from cryptography.fernet import Fernet, InvalidToken
 # It can update the user if the key is created
 
 
-class Encoding:
-    def __init__(self, Key=None):
-        self.__secretKey__ = Key or Fernet.generate_key()
-        self.__cipher__ = Fernet(self.__secretKey__)
-        self.__info__ = ""
+class Cryptography:
 
-    def Encrypt(self, _filename, _password, _webName="Unknown Website", _userName="Unknown Username", ):
-        self.__saveKey__()
-        # fernet = Fernet(self.__secretKey__)
+    def __init__(self, Key=None):
+        self.__secretKey = Key or Fernet.generate_key()
+        self.__cipher = Fernet(self.__secretKey)
+        self.info = ""
+
+    def Encrypt(self,  _password, _webName="", _userName="", _filename=""):
+        self.__saveKey()
 
         try:
-            # file_w = open(_filename, 'a')
+            if _webName == "":
+                _webName = 'Unknown Website'
+            if _userName == "":
+                _userName = "Unknown Username"
+            if _filename == "":
+                _filename = "Encrypt_default.txt"
+
             text = ('Website name: ' + _webName + ', Username: '
                     + _userName + ', Password: ' + _password + '\n').encode('utf-8')
 
-            encrypted = self.__cipher__.encrypt(text)
+            encrypted = self.__cipher.encrypt(text)
 
             print(encrypted)
             file_w = open(_filename, 'wb')
@@ -37,14 +39,22 @@ class Encoding:
             raise Exception('An error occurred.')
 
         file_w.close()
-        print(self.__secretKey__)
+        return self.info + f'\nYour data was successfully saved and encrypted! Check the {_filename} file.'
 
-    def Decrypt(self, _encryptedFilename, _decryptedFilename):
+    def Decrypt(self, _encryptedFilename, Key=None, _decryptedFilename=''):
         try:
             file_r = open(_encryptedFilename, 'rb')
             encrypted = file_r.read()
 
-            decrypted = self.__cipher__.decrypt(encrypted)
+            # The issue here is that if I assign the key to self.__cipher I'm changing it
+            # find a way to decrypt without changing the self.__cypher
+            # The program wont decrypt even if I have the encryption code
+            # imagine if i have created 10 files with different keys
+
+            decrypted = self.__cipher.decrypt(encrypted)
+
+            if _decryptedFilename == '':
+                _decryptedFilename = 'Decrypt_default.txt'
 
             file_w = open(_decryptedFilename, 'wb')
             file_w.write(decrypted)
@@ -53,21 +63,16 @@ class Encoding:
 
         file_w.close()
         file_r.close()
-        print('Decryption was a success')
+        self.info = f'Decryption was a success! Check the {_decryptedFilename} file.'
 
-    def __saveKey__(self):
+        return self.info
+
+    def __saveKey(self):
         try:
             filekey = open('filekey.txt', 'wb')
-            filekey.write(self.__secretKey__)
+            filekey.write(self.__secretKey)
         except:
             raise Exception('Failed to write to the generated key.')
 
         filekey.close()
-        self.__info__ += "The key has been generated and saved in the 'filekey.key' file."
-
-
-E1 = Encoding()
-
-#E1.Encrypt('Test1', '12345')
-
-E1.Decrypt('Test1', 'newTest1')
+        self.info = "The key has been generated and saved in the 'filekey.txt' file. Keep it safe!"
