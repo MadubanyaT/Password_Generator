@@ -94,27 +94,27 @@ def decryptPassword():
 
 # main method
 if __name__ == "__main__":
-    # length = input("Enter the length of the password ( >= 8): ")
-    #
-    # if length.isnumeric() and int(length) >= 8:
-    #     length = int(length)
-    #
-    #     option = input("Do you want to generate a password with your own set of characters(Y/N, y/n)? ").upper()
-    #     numP = input("How many password(s) do you want to generate ( >= 1)? ")
-    #
-    #     if numP.isnumeric() and int(numP) >= 1:
-    #         if option == "Y":
-    #             generateWithUserChars(length, int(numP))
-    #         elif option == "N":
-    #             generateRanPassword(length, int(numP))
-    #         else:
-    #             print("\nWrong input, try again! (Y/N, y/n)\n")
-    #     else:
-    #         print("\nWrong input, digits only and must be >= 1 are allowed.\n")
-    #
-    # else:
-    #     print("\nThe value must be numeric and >= 8.\n")
-    #
+    length = input("Enter the length of the password ( >= 8): ")
+    
+    if length.isnumeric() and int(length) >= 8:
+        length = int(length)
+    
+        option = input("Do you want to generate a password with your own set of characters(Y/N, y/n)? ").upper()
+        numP = input("How many password(s) do you want to generate ( >= 1)? ")
+    
+        if numP.isnumeric() and int(numP) >= 1:
+            if option == "Y":
+                generateWithUserChars(length, int(numP))
+            elif option == "N":
+                generateRanPassword(length, int(numP))
+            else:
+                print("\nWrong input, try again! (Y/N, y/n)\n")
+        else:
+            print("\nWrong input, digits only and must be >= 1 are allowed.\n")
+    
+    else:
+        print("\nThe value must be numeric and >= 8.\n")
+    
     cOption = input("Do you want to:\nA) Save and encrypt a password? \nB) Decrypt a Saved password?\nC)"
                     "Exit the program?\n\nSelect an option (A, B, or C): ").upper()
 
