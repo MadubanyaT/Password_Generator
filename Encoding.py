@@ -42,16 +42,14 @@ class Cryptography:
         return self.info + f'\nYour data was successfully saved and encrypted! Check the {_filename} file.'
 
     def Decrypt(self, _encryptedFilename, Key=None, _decryptedFilename=''):
+
+        key = Fernet(Key)
+
         try:
             file_r = open(_encryptedFilename, 'rb')
             encrypted = file_r.read()
 
-            # The issue here is that if I assign the key to self.__cipher I'm changing it
-            # find a way to decrypt without changing the self.__cypher
-            # The program wont decrypt even if I have the encryption code
-            # imagine if i have created 10 files with different keys
-
-            decrypted = self.__cipher.decrypt(encrypted)
+            decrypted = key.decrypt(encrypted)
 
             if _decryptedFilename == '':
                 _decryptedFilename = 'Decrypt_default.txt'
