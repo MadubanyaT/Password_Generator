@@ -32,17 +32,16 @@ class Cryptography:
 
             encrypted = self.__cipher.encrypt(text)
 
-            print(encrypted)
-            file_w = open(_filename, 'wb')
+            file_w = open(_filename, 'ab')
             file_w.write(encrypted)
         except:
             raise Exception('An error occurred.')
 
         file_w.close()
-        return self.info + f'\nYour data was successfully saved and encrypted! Check the {_filename} file.'
+        self.info += f'\nYour data was successfully saved and encrypted! Check the {_filename} file.'
+        return self.info
 
     def Decrypt(self, _encryptedFilename, Key=None, _decryptedFilename=''):
-
         key = Fernet(Key)
 
         try:
@@ -54,7 +53,7 @@ class Cryptography:
             if _decryptedFilename == '':
                 _decryptedFilename = 'Decrypt_default.txt'
 
-            file_w = open(_decryptedFilename, 'wb')
+            file_w = open(_decryptedFilename, 'ab')
             file_w.write(decrypted)
         except cryptography.exceptions as c:
             return 'Failed'
