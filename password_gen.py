@@ -78,8 +78,8 @@ def encryptPassword():
     fileName = input('Enter a filename/path to save your data (optional): ')
 
     if password != '':
-        encoding.Encrypt(password, webName, userName, fileName)
-        print(encoding.info)
+        encoding.saveThenEncrypt(password, webName, userName, fileName)
+        print('\n' + encoding.info)
     else:
         print('No password was provided, try again!')
 
@@ -94,7 +94,7 @@ def decryptPassword():
     else:
         k = bytes(key, 'utf-8')
         encoding.Decrypt(encryptedfile, k, dFilename)
-        print(encoding.info)
+        print('\n' + encoding.info)
 
 
 # main method
@@ -129,8 +129,6 @@ if __name__ == "__main__":
 
             if cOption == 'Y' and b:
                 encryptPassword()
-            else:
-                print('\nWrong option, try again')
 
     elif fOption == 'B':
         decryptPassword()
