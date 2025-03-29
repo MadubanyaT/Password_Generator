@@ -75,10 +75,9 @@ def encryptPassword():
     password = input('''Enter the password you've copied: ''')
     webName = input('Enter the website for the password (optional): ')
     userName = input('Enter the associated username for the password (optional): ')
-    fileName = input('Enter a filename/path to save your data (optional): ')
 
     if password != '':
-        encoding.saveThenEncrypt(password, webName, userName, fileName)
+        encoding.saveThenEncrypt(password, webName, userName)
         print('\n' + encoding.info)
     else:
         print('No password was provided, try again!')
@@ -87,13 +86,12 @@ def encryptPassword():
 def decryptPassword():
     encryptedfile = input('\nEnter the filename/path of the encrypted file: ')
     key = input('Enter the encryption key: ')
-    dFilename = input('Enter the filename/path where the data will be decrypted to (optional): ')
 
     if encryptedfile == '' and key == '':
         print('No input on the encrypted filename or key, try again!')
     else:
         k = bytes(key, 'utf-8')
-        encoding.Decrypt(encryptedfile, k, dFilename)
+        encoding.Decrypt(encryptedfile, k)
         print('\n' + encoding.info)
 
 
