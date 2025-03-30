@@ -3,11 +3,6 @@ import string
 import sys
 from Encoding import Cryptography
 
-# Ask the user for the length of the password > 8
-# divide it into 3 parts e.g. if he enters len=12 then divide it by 3 = 4
-# each part must let the user enter allow the user to enter their own 4 letters, numbers, & puncs.
-# form those chars randomly sort them & create a password out of them.
-# It can further by creating a file and storing the password. Also encrypting the file for safety
 encoding = Cryptography()
 
 
@@ -92,13 +87,14 @@ def decryptPassword():
     else:
         k = bytes(key, 'utf-8')
         encoding.Decrypt(encryptedfile, k)
-        print('\n' + encoding.info)
+        if encoding.info != '':
+            print('\n' + encoding.info)
 
 
 # main method
 if __name__ == "__main__":
     # Ask the user if they want to de
-    fOption = input('A) Generate and encrypt a password,\nB) Decrypt a file.\nSelect an option (A/B): ').upper()
+    fOption = input('A) Generate and encrypt a password.\nB) Decrypt a file.\nSelect an option (A/B): ').upper()
 
     if fOption == 'A':
         b = False

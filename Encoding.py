@@ -5,7 +5,6 @@ import cryptography
 from cryptography.exceptions import InvalidSignature
 from cryptography.fernet import Fernet, InvalidToken
 
-# Giving a user a default file instead of their input e.g Encrypted, Decrypted
 
 class Cryptography:
 
@@ -48,40 +47,41 @@ class Cryptography:
             _filename = 'Encrypted'
             file_wE = open(_filename, 'wb')
             file_wE.write(encrypted)
-        except:
-            raise Exception('An error occurred.')
+            file_wE.close()
+        except Exception as e:
+            print(f'Error: {e}')
 
-        file_wE.close()
         self.info += (f'\nYour data was successfully saved and encrypted! Check the {_filename} file.'
                       f'\nYou can delete the decrypted file')
         return self.info
 
     def Decrypt(self, _encryptedFilename, Key=None):
-        key = Fernet(Key)
-
+        _decryptedFilename = 'Decrypted'
+        b = False
         if os.path.isfile(_encryptedFilename):
             try:
+                key = Fernet(Key)
+
                 file_r = open(_encryptedFilename, 'rb')
                 encrypted = file_r.read()
 
                 decrypted = key.decrypt(encrypted)
 
-                _decryptedFilename = 'Decrypted'
-
                 file_w = open(_decryptedFilename, 'ab')
                 file_w.write(decrypted)
-            except InvalidToken:
-                self.info = '\nInvalid Key'
-                return
-            except Exception:
-                self.info = '\nFailed to write to the generated key.'
-                return
 
-            file_w.close()
-            file_r.close()
-            self.info = f'\nDecryption was a success! Check the {_decryptedFilename} file.'
+                file_w.close()
+                file_r.close()
+                b = True
+            except InvalidToken as i:
+                print(f'Key Error: {i}')
+            except Exception as e:
+                print(f'Decryption Error: {e}')
+
+            if b:
+                self.info = f'Decryption was a success! Check the {_decryptedFilename} file.'
         else:
-            self.info = '''\nThe file doesn't exists.'''
+            self.info = '''The file doesn't exists.'''
 
         return self.info
 
