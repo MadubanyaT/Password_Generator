@@ -26,14 +26,14 @@ def generateWithUserChars(length, loop):
                     print(f"\nPassword {i} => {password}", end='')
                     i += 1
 
-                print('\nYou can copy a password to save and encrypt.')
+                print('\n[+] You can copy a password to save and encrypt.')
                 return True
             else:
-                print(f"\nTry again and enter punctuations only with a length of {c_len}. NB: No currency symbols!")
+                print(f"\n[-] Try again and enter punctuations only with a length of {c_len}. NB: No currency symbols!")
         else:
-            print(f"\nTry again and enter digits only with a length of {c_len}.")
+            print(f"\n[-] Try again and enter digits only with a length of {c_len}.")
     else:
-        print(f"\nTry again and enter alphabets only! with a length of {c_len + len_rem}.")
+        print(f"\n[-] Try again and enter alphabets only! with a length of {c_len + len_rem}.")
 
     return False
 
@@ -47,7 +47,7 @@ def generateRanPassword(_length, loop):
         print(f"Password {i} => {password}")
         i += 1
 
-    print('\nYou can copy a password to save and encrypt.')
+    print('\n[+] You can copy a password to save and encrypt.')
     return True
 
 
@@ -73,9 +73,9 @@ def encryptPassword():
 
     if password != '':
         encoding.saveThenEncrypt(password, webName, userName)
-        print('\n' + encoding.info)
+        print('\n[-] ' + encoding.info)
     else:
-        print('No password was provided, try again!')
+        print('[-] No password was provided, try again!')
 
 
 def decryptPassword():
@@ -83,12 +83,12 @@ def decryptPassword():
     key = input('Enter the encryption key: ')
 
     if encryptedfile == '' and key == '':
-        print('No input on the encrypted filename or key, try again!')
+        print('[-] No input on the encrypted filename or key, try again!')
     else:
         k = bytes(key, 'utf-8')
         encoding.Decrypt(encryptedfile, k)
         if encoding.info != '':
-            print('\n' + encoding.info)
+            print('\n[+]' + encoding.info)
 
 
 # main method
@@ -112,11 +112,11 @@ if __name__ == "__main__":
                 elif option == "N":
                     b = generateRanPassword(length, int(numP))
                 else:
-                    print("\nWrong input, try again! (Y/N)")
+                    print("\n[-] Wrong input, try again! (Y/N)")
             else:
-                print("\nWrong input, digits only and must be >= 1")
+                print("\n[-] Wrong input, digits only and must be >= 1")
         else:
-            print("\nThe value must be numeric and >= 8.")
+            print("\n[-] The value must be numeric and >= 8.")
 
         if b:
             cOption = input("\nSave and encrypt a password (Y/N): ").upper()
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     elif fOption == 'B':
         decryptPassword()
     else:
-        print('\nWrong option, try again')
+        print('\n[-] Wrong option, try again')
 
-    print('\nThanks for using the program)')
+    print('\n[+] Thanks for using the program)')
     sys.exit()
