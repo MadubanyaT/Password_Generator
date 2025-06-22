@@ -6,6 +6,21 @@ from Encoding import Cryptography
 encoding = Cryptography()
 
 
+def banner():
+    print("""
+ _______    ______    ______    ______         ________  __    __   ______  
+/       \  /      \  /      \  /      \       /        |/  \  /  | /      \ 
+$$$$$$$  |/$$$$$$  |/$$$$$$  |/$$$$$$  |      $$$$$$$$/ $$  \ $$ |/$$$$$$  |
+$$ |__$$ |$$ |__$$ |$$ \__$$/ $$ \__$$/       $$ |__    $$$  \$$ |$$ |  $$/ 
+$$    $$/ $$    $$ |$$      \ $$      \       $$    |   $$$$  $$ |$$ |      
+$$$$$$$/  $$$$$$$$ | $$$$$$  | $$$$$$  |      $$$$$/    $$ $$ $$ |$$ |   __ 
+$$ |      $$ |  $$ |/  \__$$ |/  \__$$ |      $$ |_____ $$ |$$$$ |$$ \__/  |
+$$ |      $$ |  $$ |$$    $$/ $$    $$/______ $$       |$$ | $$$ |$$    $$/ 
+$$/       $$/   $$/  $$$$$$/   $$$$$$//      |$$$$$$$$/ $$/   $$/  $$$$$$/  
+                                      $$$$$$/                                                                                                                                                                                                                                                                                                                                
+    """)
+
+
 # Working with Passwords
 def generateWithUserChars(length, loop):
     c_len = int(length / 3)
@@ -93,6 +108,7 @@ def decryptPassword():
 
 # main method
 if __name__ == "__main__":
+    banner()
     # Ask the user if they want to de
     fOption = input('A) Generate and encrypt a password.\nB) Decrypt a file.\nSelect an option (A/B): ').upper()
 
